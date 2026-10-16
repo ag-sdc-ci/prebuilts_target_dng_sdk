@@ -1,0 +1,6 @@
+shadow prebuilt repo: dng_sdk (target)
+  upstream: external/dng_sdk
+  api-level: 32 (branch 32-20261016)
+  blobs: org.blisslabs.ag.dng_sdk.apex org.blisslabs.ag.dng_sdk.dev.apex org.blisslabs.ag.dng_sdk.doc.apex
+  dev-src: extracted dev payload + dng_sdk headers + root Android.bp
+  date: 2026-10-16

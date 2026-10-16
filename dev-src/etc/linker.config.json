@@ -1,0 +1,9 @@
+{
+	"provideLibs": [	
+		    "libdummy_dng_sdk_dev-x86_64-v2.so",
+		    "libdummy_dng_sdk_dev.so",
+		    "libdummy_headers_dng_sdk-x86_64-v2.so",
+		    "libdummy_headers_dng_sdk.so"
+	],
+	"visible": true
+}

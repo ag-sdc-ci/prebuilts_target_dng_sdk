@@ -1,0 +1,54 @@
+package {
+    default_applicable_licenses: ["external_dng_sdk_license"],
+}
+
+license {
+    name: "external_dng_sdk_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+        "SPDX-license-identifier-MIT",
+        "legacy_by_exception_only",
+    ],
+    license_text: [
+        "LICENSE",
+        "NOTICE",
+        "PATENTS",
+    ],
+}
+
+prebuilt_apex {
+    name: "org.blisslabs.ag.dng_sdk",
+    apex_name: "org.blisslabs.ag.dng_sdk",
+    source_apex_name: "org.blisslabs.ag.dng_sdk",
+    arch: {
+        x86_64: {
+            src: "org.blisslabs.ag.dng_sdk.apex",
+        },
+    },
+    filename: "org.blisslabs.ag.dng_sdk.apex",
+    prefer: true,
+    installable: true,
+}
+
+cc_defaults {
+    name: "libdng_sdk-defaults",
+    cflags: ["-DqDNGValidate=0"],
+}
+
+cc_prebuilt_library_shared {
+    name: "libdng_sdk",
+    host_supported: true,
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    export_include_dirs: [
+        "dev-src/include",
+        "dev-src/include/dng_sdk",
+    ],
+    srcs: ["src/lib/libdng_sdk.so"],
+    shared_libs: [
+        "libz",
+        "libjpeg",
+    ],
+}
