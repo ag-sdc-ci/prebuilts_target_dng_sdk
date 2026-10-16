@@ -1,3 +1,6 @@
+// Auto-generated prebuilt Blueprint for external/dng_sdk
+// Dual-slice extractive shadow (target bionic + host glibc)
+
 package {
     default_applicable_licenses: ["external_dng_sdk_license"],
 }
@@ -17,38 +20,41 @@ license {
     ],
 }
 
-prebuilt_apex {
-    name: "org.blisslabs.ag.dng_sdk",
-    apex_name: "org.blisslabs.ag.dng_sdk",
-    source_apex_name: "org.blisslabs.ag.dng_sdk",
-    arch: {
-        x86_64: {
-            src: "org.blisslabs.ag.dng_sdk.apex",
-        },
-    },
-    filename: "org.blisslabs.ag.dng_sdk.apex",
-    prefer: true,
-    installable: true,
-}
-
 cc_defaults {
     name: "libdng_sdk-defaults",
     cflags: ["-DqDNGValidate=0"],
 }
 
-cc_prebuilt_library_shared {
+cc_prebuilt_library {
     name: "libdng_sdk",
     host_supported: true,
     vendor_available: true,
     product_available: true,
     recovery_available: true,
+    check_elf_files: false,
     export_include_dirs: [
-        "dev-src/include",
-        "dev-src/include/dng_sdk",
+        "include",
+        "include/dng_sdk",
     ],
-    srcs: ["src/lib/libdng_sdk.so"],
-    shared_libs: [
-        "libz",
-        "libjpeg",
+    target: {
+        host: {
+            shared: { srcs: ["host/lib64/libdng_sdk.so"] },
+            static: { srcs: ["host/lib64/libdng_sdk.a"] },
+        },
+        android: {
+            shared: { srcs: ["target/lib64/libdng_sdk.so"] },
+            static: { srcs: ["target/lib64/libdng_sdk.a"] },
+        },
+    },
+}
+
+cc_prebuilt_library_static {
+    name: "libdng_sdk_validate",
+    vendor_available: true,
+    product_available: true,
+    export_include_dirs: [
+        "include",
+        "include/dng_sdk",
     ],
+    srcs: ["target/lib64/libdng_sdk_validate.a"],
 }
